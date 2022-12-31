@@ -2,6 +2,8 @@
 # @File: main.py.py
 # @Software: PyCharm
 from transaction import *
+
+
 def MainMenu():
     print("-----------MAIN MENU-----------")
     while True:
@@ -23,6 +25,7 @@ def MainMenu():
         else:
             print("error input")
 
+
 def ReaderFunctionsMenu(card_number):
     print("-----------Dear Reader-" + card_number + ", welcome-----------")
     while True:
@@ -43,9 +46,13 @@ def ReaderFunctionsMenu(card_number):
             continue
         elif mode == "3":
             # todo
+            title = input("please enter the title of the document you want to return")
+            document_return(title, card_number)
             continue
         elif mode == "4":
             # todo
+            title = input("please enter the title of the document you want to reserve")
+            document_reserve(title,card_number)
             continue
         elif mode == "5":
             # todo
@@ -61,6 +68,7 @@ def ReaderFunctionsMenu(card_number):
             continue
         else:
             print("error input")
+
 
 def AdministrativeFunctionsMenu(id, password):
     print("-----------Dear Administrator, welcome-----------")

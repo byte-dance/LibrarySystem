@@ -1,7 +1,6 @@
 import pymysql
 import threading
 
-
 mutex = threading.Lock()
 
 
@@ -121,7 +120,30 @@ class DBHelper:
             # self.close()
             return False
         return True
+    # 更新数据
+    def update_data(self, sql):
+        self.confirm_connection()
+        try:
+            if self.conn and self.cur:
+                mutex.acquire()
+                self.cur.execute(sql)
+                self.conn.commit()
+                mutex.release()
+            else:
+                print('数据库连接失败')
+        except Exception as e:
+            print(f'更新数据失败，sql{sql}')
+            print(e)
+            # self.close()
+            return False
+        return True
 
 
 dbhelper_singleton = DBHelper()
 
+if __name__ == '__main__':
+    sql_str = f'''UPDATE editor 
+    SET `name` = '张三' 
+    WHERE
+	editor_id = 1;'''
+    dbhelper_singleton.update_data(sql_str)
